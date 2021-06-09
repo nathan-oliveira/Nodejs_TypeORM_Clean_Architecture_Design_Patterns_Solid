@@ -1,5 +1,3 @@
-import { TUser } from '@/data/contracts'
-
 export type TUserRequestCreate = {
   name: string
   email: string
@@ -8,5 +6,5 @@ export type TUserRequestCreate = {
 }
 
 export interface IUserService {
-  create: (dataForm: TUser) => Promise<any>
+  create: (dataForm: any) => Promise<any>
 }

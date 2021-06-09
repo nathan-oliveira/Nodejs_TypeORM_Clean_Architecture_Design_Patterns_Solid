@@ -8,9 +8,12 @@ export class SignUpController implements Controller {
     const { name, email, password, password_confirmation } = http.body as TUserRequestCreate
 
     try {
-      // this.userService.create()
+      const result = await this.userService.create({ name, email, password, foto: '' })
+      console.log('result => ', result)
+
       return ok({ message: 'Ok!' })
     } catch (err) {
+      console.log(err)
       return serverError(err)
     }
   }

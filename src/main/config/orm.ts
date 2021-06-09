@@ -1,3 +1,5 @@
+import { UserDAO } from '@/infra/data-sources'
+
 export default {
   type: 'mysql',
   host: process.env.DB_HOST,
@@ -7,9 +9,7 @@ export default {
   database: process.env.DB_DATABASE,
   synchronize: false,
   logging: true,
-  entities: [
-    './src/infra/data-sources/database/*.{js,ts}'
-  ],
+  entities: [UserDAO],
   migrations: [
     './src/infra/database/migrations/*.{js,ts}'
   ],
