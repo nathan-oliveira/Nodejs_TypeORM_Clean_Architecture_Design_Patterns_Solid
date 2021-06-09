@@ -5,6 +5,11 @@ export type HttpResponse<T = any> = {
   data: T
 }
 
+export type HttpRequest<T = any> = {
+  body?: T
+  headers?: T
+}
+
 export const ok = (data: any): HttpResponse => ({
   statusCode: StatusCode.ok,
   data: data

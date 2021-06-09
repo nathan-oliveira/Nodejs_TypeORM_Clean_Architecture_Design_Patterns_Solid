@@ -1,1 +1,1 @@
-export * from './make-teste-controller'
+export * from './make-user-controller'

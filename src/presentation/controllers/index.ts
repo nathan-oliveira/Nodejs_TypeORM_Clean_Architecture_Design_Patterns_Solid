@@ -1,1 +1,1 @@
-export * from './teste'
+export * from './user'

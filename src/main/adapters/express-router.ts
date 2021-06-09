@@ -1,10 +1,16 @@
 import { Request, Response } from 'express'
 
-import { Controller } from '@/presentation/contracts'
+import { Controller, HttpRequest } from '@/presentation/contracts'
 
 export const adaptRoute = (controller: Controller) => {
   return async (req: Request, res: Response) => {
-    const httpResponse = await controller.get()
+    const httpRequest: HttpRequest = {
+      body: req.body
+    }
+
+    const httpResponse = await controller.handle(httpRequest)
     res.status(httpResponse.statusCode).json(httpResponse.data)
   }
 }
+
+// message
