@@ -8,6 +8,7 @@ export type HttpResponse<T = any> = {
 export type HttpRequest<T = any> = {
   body?: T
   headers?: T
+  params?: T
 }
 
 export const ok = (data: any): HttpResponse => ({

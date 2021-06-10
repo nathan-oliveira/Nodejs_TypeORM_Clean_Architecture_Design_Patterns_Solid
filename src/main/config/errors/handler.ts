@@ -8,7 +8,7 @@ class ErrorHandler {
     if (err instanceof Errors) {
       res.status(err.statusCode).json(err.message)
     } else {
-      res.status(StatusCode.serverError).json({ error: 'Internal server error!' })
+      res.status(StatusCode.serverError).json({ error: [{ message: 'Internal server error!' }] })
     }
   }
 }

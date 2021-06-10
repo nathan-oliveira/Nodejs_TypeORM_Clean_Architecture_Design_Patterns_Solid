@@ -1,4 +1,4 @@
-import { SignUpController } from '@/presentation/controllers/user/signup/signup-controller'
+import { SignUpController } from '@/presentation/controllers'
 import { UserRepository } from '@/infra/repositories'
 import { UserService } from '@/data/services'
 

@@ -1,5 +1,6 @@
 import { Controller, HttpResponse, HttpRequest, serverError, ok } from '@/presentation/contracts'
 import { IUserService, TUserRequestCreate } from '@/domain/usecases'
+import { BCrypt } from '@/presentation/helpers'
 
 export class SignUpController implements Controller {
   constructor (private readonly userService: IUserService) {}
@@ -8,12 +9,10 @@ export class SignUpController implements Controller {
     const { name, email, password, password_confirmation } = http.body as TUserRequestCreate
 
     try {
-      const result = await this.userService.create({ name, email, password, foto: '' })
-      console.log('result => ', result)
-
-      return ok({ message: 'Ok!' })
+      const passwordHash = await BCrypt.createPasswordHash(password, password_confirmation)
+      const result = await this.userService.create({ name, email, password: passwordHash, foto: '*' })
+      return ok(result)
     } catch (err) {
-      console.log(err)
       return serverError(err)
     }
   }
