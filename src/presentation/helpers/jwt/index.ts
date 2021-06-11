@@ -22,7 +22,7 @@ export class JwT {
       (<any>req).user = { id, level }
       next()
     } catch (err) {
-      const error = await createError([{ property: 'token', message: err.message }])
+      const error = await createError([{ property: ['token'], message: err.message }])
       const { statusCode, data } = unauthorizedError(error)
       res.status(statusCode).json(data)
     }

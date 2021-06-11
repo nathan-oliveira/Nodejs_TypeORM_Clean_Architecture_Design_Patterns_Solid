@@ -4,6 +4,7 @@ export enum StatusCode {
   badRequest = 400,
   notFound = 404,
   forbidden = 403,
+  invalidArgument = 422,
   serverError = 500,
   badGateway = 502,
 }

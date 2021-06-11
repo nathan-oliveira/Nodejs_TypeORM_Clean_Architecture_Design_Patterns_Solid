@@ -1,18 +1,14 @@
-import { EntityRepository, Repository } from 'typeorm'
+import { getRepository } from 'typeorm'
 
 import { UserDAO } from '@/infra/data-sources'
 import { TUser, IUserRepository } from '@/data/contracts'
 
-@EntityRepository(UserDAO)
-export class UserRepository extends Repository<UserDAO> implements IUserRepository {
+export class UserRepository implements IUserRepository {
   async toCreate (dataForm: TUser): Promise<UserDAO> {
-    const isThereEmail = await this.searchEmail(dataForm.email)
-    if (isThereEmail.length > 0) throw new Error('E-mail informado já está cadastrado!')
-
-    return await this.manager.save(UserDAO, dataForm)
+    return getRepository(UserDAO).save(dataForm)
   }
 
   async searchEmail (email: string): Promise<UserDAO[]> {
-    return await this.manager.find(UserDAO, { where: { email } })
+    return getRepository(UserDAO).find({ where: { email } })
   }
 }

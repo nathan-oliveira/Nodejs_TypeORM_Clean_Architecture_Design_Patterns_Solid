@@ -1,19 +1,17 @@
-import { Controller, HttpResponse, HttpRequest, serverError, ok } from '@/presentation/contracts'
-import { IUserService, TUserRequestCreate } from '@/domain/usecases'
-import { BCrypt } from '@/presentation/helpers'
+import { Controller, HttpResponse, HttpRequest, invalidArgument, ok } from '@/presentation/contracts'
+import { IUserService } from '@/domain/usecases'
 
 export class SignUpController implements Controller {
   constructor (private readonly userService: IUserService) {}
 
   async handle (http: HttpRequest): Promise<HttpResponse<any>> {
-    const { name, email, password, password_confirmation } = http.body as TUserRequestCreate
+    const { name, email, password, password_confirmation } = http.body
 
     try {
-      const passwordHash = await BCrypt.createPasswordHash(password, password_confirmation)
-      const result = await this.userService.create({ name, email, password: passwordHash, foto: '*' })
+      const result = await this.userService.create({ name, email, password, password_confirmation, photo: '*' })
       return ok(result)
     } catch (err) {
-      return serverError(err)
+      return invalidArgument(err)
     }
   }
 }

@@ -1,10 +1,6 @@
-export type TUserRequestCreate = {
-  name: string
-  email: string
-  password: string
-  password_confirmation: string
-}
+import { TUserCreate } from '@/domain/entities'
+import { TUser } from '@/data/contracts'
 
 export interface IUserService {
-  create: (dataForm: any) => Promise<any>
+  create: (dataForm: TUser) => Promise<TUserCreate>
 }

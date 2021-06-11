@@ -45,3 +45,8 @@ export const notFound = (error: any): HttpResponse => ({
   statusCode: StatusCode.notFound,
   data: error.message
 })
+
+export const invalidArgument = (error: any): HttpResponse => ({
+  statusCode: StatusCode.invalidArgument,
+  data: error.message
+})
