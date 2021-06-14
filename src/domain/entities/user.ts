@@ -3,4 +3,5 @@ export type TUserCreate = {
   email: string
   active: boolean
   level: number
+  photo: string
 }

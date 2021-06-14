@@ -8,7 +8,7 @@ export default {
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
   synchronize: false,
-  logging: true,
+  logging: false,
   entities: [UserDAO],
   migrations: [
     './src/infra/database/migrations/*.{js,ts}'

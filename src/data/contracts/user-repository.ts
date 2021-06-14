@@ -1,3 +1,5 @@
+import { TUserCreate } from '@/domain/entities'
+
 export type TUser = {
   name: string
   email: string
@@ -9,5 +11,6 @@ export type TUser = {
 }
 
 export interface IUserRepository {
-  toCreate: (dataForm: TUser) => object
+  toCreate: (dataForm: TUser) => Promise<TUserCreate>
+  searchEmail: (email: string) => Promise<object[]>
 }

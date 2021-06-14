@@ -2,5 +2,6 @@ import { TUserCreate } from '@/domain/entities'
 import { TUser } from '@/data/contracts'
 
 export interface IUserService {
-  create: (dataForm: TUser) => Promise<TUserCreate>
+  signUp: (dataForm: TUser) => Promise<TUserCreate>
+  validateCreateUser: (dataForm: TUser) => Promise<void>
 }
