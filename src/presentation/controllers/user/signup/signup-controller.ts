@@ -1,4 +1,10 @@
-import { Controller, HttpResponse, HttpRequest, invalidArgument, ok } from '@/presentation/contracts'
+import {
+  Controller,
+  HttpResponse,
+  HttpRequest,
+  invalidArgument,
+  ok
+} from '@/presentation/contracts'
 import { IUserService } from '@/domain/usecases'
 
 export class SignUpController implements Controller {
@@ -8,7 +14,13 @@ export class SignUpController implements Controller {
     const { name, email, password, password_confirmation } = http.body
 
     try {
-      const result = await this.userService.create({ name, email, password, password_confirmation, photo: '*' })
+      const result = await this.userService.create({
+        name,
+        email,
+        password,
+        password_confirmation,
+        photo: '*'
+      })
       return ok(result)
     } catch (err) {
       return invalidArgument(err)
