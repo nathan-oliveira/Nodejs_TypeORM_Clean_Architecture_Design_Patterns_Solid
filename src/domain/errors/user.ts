@@ -53,3 +53,11 @@ export class UserEmptyPasswordError extends Error {
     this.stack = 'password'
   }
 }
+
+export class UserTokenError extends Error {
+  constructor (msg: string) {
+    super(msg)
+    this.name = 'UserTokenError'
+    this.stack = 'token'
+  }
+}

@@ -2,7 +2,7 @@ import { IUserService } from '@/domain/usecases'
 import { UserDAO } from '@/infra/data-sources'
 import { TUserCreate } from '@/domain/entities'
 import { TUser, IUserRepository } from '@/data/contracts'
-import { validateError, createError, BCrypt } from '@/presentation/helpers'
+import { validateError, BCrypt } from '@/presentation/helpers'
 import { UserExistingEmailError, UserEmptyEmailError } from '@/domain/errors'
 
 export class UserService implements IUserService {
@@ -10,7 +10,7 @@ export class UserService implements IUserService {
 
   async validateCreateUser (dataForm: TUser): Promise<void> {
     const result = await this.userRepository.searchEmail(dataForm.email)
-    if (result.length > 0) await createError(new UserExistingEmailError())
+    if (result.length > 0) await validateError(new UserExistingEmailError())
     const user = UserDAO.create(dataForm)
     await validateError(user)
   }
@@ -24,6 +24,6 @@ export class UserService implements IUserService {
   }
 
   async getUserByEmail (email: string): Promise<any> {
-    if (!email) await createError(new UserEmptyEmailError())
+    if (!email) await validateError(new UserEmptyEmailError())
   }
 }

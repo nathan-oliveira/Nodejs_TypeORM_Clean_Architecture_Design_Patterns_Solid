@@ -2,7 +2,8 @@ import * as jwt from 'jsonwebtoken'
 import { Request, Response, NextFunction } from 'express'
 
 import { env } from '@/main/config/env'
-import { createError } from '@/presentation/helpers'
+import { validateError } from '@/presentation/helpers'
+import { UserTokenError } from '@/domain/errors'
 import { unauthorizedError, TJwT, TCreateToken, TJwTPayload } from '@/presentation/contracts'
 
 export class JwT {
@@ -22,7 +23,7 @@ export class JwT {
       (<any>req).user = { id, level }
       next()
     } catch (err) {
-      const error = await createError([{ property: ['token'], message: err.message }])
+      const error = await validateError(new UserTokenError(err.message))
       const { statusCode, data } = unauthorizedError(error)
       res.status(statusCode).json(data)
     }
