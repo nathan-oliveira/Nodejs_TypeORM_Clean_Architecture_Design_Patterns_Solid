@@ -1,4 +1,5 @@
 import { TUserCreate } from '@/domain/entities'
+import { TCreateToken } from '@/presentation/contracts'
 
 export class SignUpViewModel {
   name: string
@@ -17,3 +18,5 @@ export class SignUpViewModel {
     }
   }
 }
+
+export type LoginViewModel = TCreateToken

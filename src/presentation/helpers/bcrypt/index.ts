@@ -2,6 +2,7 @@ import * as bcrypt from 'bcrypt'
 
 import { JwT } from '@/presentation/helpers/jwt'
 import { validateError } from '@/presentation/helpers'
+import { TCreateToken } from '@/presentation/contracts'
 import {
   UserMinimumPasswordError,
   UserEmptyConfirmPasswordError,
@@ -18,7 +19,7 @@ export class BCrypt {
     return bcrypt.hash(password, 8)
   }
 
-  static async comparePasswordHash (password: string, user: any): Promise<object> {
+  static async comparePasswordHash (password: string, user: any): Promise<TCreateToken> {
     if (!password) await validateError(new UserEmptyPasswordError())
     if (!user || !user.password) await validateError(new UserInvalidError())
     const compareUser = await bcrypt.compare(password, user.password)

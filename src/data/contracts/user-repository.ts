@@ -1,5 +1,10 @@
 import { TUserCreate } from '@/domain/entities'
 
+export type TUserRequest = {
+  email: string
+  password: string
+}
+
 export type TUser = {
   name: string
   email: string
