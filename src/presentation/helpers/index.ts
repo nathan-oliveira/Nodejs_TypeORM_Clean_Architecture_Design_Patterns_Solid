@@ -1,4 +1,3 @@
-export * from './validator'
+export * from './validate'
 export * from './jwt'
 export * from './bcrypt'
-export * from './http/status-code'
