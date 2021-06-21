@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcrypt'
 
-import { JwT } from '@/presentation/helpers/jwt'
+import { createToken } from '@/presentation/helpers/jwt'
 import { validateError } from '@/presentation/helpers'
 import { TCreateToken } from '@/presentation/contracts'
 import {
@@ -24,6 +24,6 @@ export class BCrypt {
     if (!user || !user.password) await validateError(new UserInvalidError())
     const compareUser = await bcrypt.compare(password, user.password)
     if (!compareUser) await validateError(new UserInvalidError())
-    return JwT.createToken(user)
+    return createToken(user)
   }
 }

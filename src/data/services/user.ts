@@ -2,7 +2,7 @@ import { IUserService } from '@/domain/usecases'
 import { UserDAO } from '@/infra/data-sources'
 import { TUserCreate, TUserLogin } from '@/domain/entities'
 import { TUser, TUserRequest, IUserRepository } from '@/data/contracts'
-import { validateError, BCrypt, JwT } from '@/presentation/helpers'
+import { validateError, BCrypt, createToken } from '@/presentation/helpers'
 import { UserExistingEmailError, UserEmptyEmailError, UserEmptyPasswordError, UserInvalidError } from '@/domain/errors'
 
 export class UserService implements IUserService {
@@ -40,6 +40,6 @@ export class UserService implements IUserService {
 
     const compareUser = await BCrypt.comparePasswordHash(dataForm.password, user[0])
     if (!compareUser) await validateError(new UserInvalidError())
-    return JwT.createToken(user[0])
+    return createToken(user[0])
   }
 }
