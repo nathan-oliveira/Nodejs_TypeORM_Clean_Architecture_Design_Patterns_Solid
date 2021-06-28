@@ -54,6 +54,14 @@ export class UserEmptyPasswordError extends Error {
   }
 }
 
+export class UserNotFoundError extends Error {
+  constructor () {
+    super('Usuário não encontrado!')
+    this.name = 'UserNotFoundError'
+    this.stack = 'user'
+  }
+}
+
 export class UserTokenError extends Error {
   constructor (msg: string) {
     super(msg)

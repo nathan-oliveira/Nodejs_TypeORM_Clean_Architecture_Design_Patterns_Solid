@@ -15,7 +15,20 @@ export type TUser = {
   level?: number
 }
 
+export type TUserSearch = {
+  id: number
+  name: string
+  email: string
+  password: string
+  active: boolean
+  photo: string
+  level: number
+  created_at: Date
+  updated_at: Date
+}
+
 export interface IUserRepository {
   toCreate: (dataForm: TUser) => Promise<TUserCreate>
-  searchEmail: (email: string) => Promise<object[]>
+  searchEmail: (email: string) => Promise<TUserSearch[]>
+  getById: (id: number) => Promise<object[]>
 }

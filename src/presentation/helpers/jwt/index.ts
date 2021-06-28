@@ -6,13 +6,13 @@ import { validateError } from '@/presentation/helpers'
 import { UserTokenError } from '@/domain/errors'
 import { unauthorizedError, TJwT, TCreateToken, TJwTPayload } from '@/presentation/contracts'
 
-export const createToken = async (dataForm: TJwT): Promise<TCreateToken> => {
-  const { id, name, email, level, photo } = dataForm
+export const createToken = async (dataForm: any): Promise<TCreateToken> => {
+  const { id, name, email, level, photo } = dataForm as TJwT
   const token = jwt.sign({ id, level }, env.secret, { expiresIn: '1d' })
   return { name, email, level, photo, token }
 }
 
-export const jwtMiddleware = (exclusions: string[]): any => {
+export const accessControl = (exclusions: string[]): any => {
   return async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     if (!exclusions.includes(req.url)) {
       const auth = req.headers.authorization
