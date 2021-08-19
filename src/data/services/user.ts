@@ -1,6 +1,6 @@
 import { IUserService } from '@/domain/usecases'
 import { UserDAO } from '@/infra/data-sources'
-import { TUserCreate, TUserLogin } from '@/domain/entities'
+import { TUserCreate, TUserLogin, TUserProfile } from '@/domain/entities'
 import { TUser, TUserRequest, IUserRepository } from '@/data/contracts'
 import { validateError, BCrypt, createToken } from '@/presentation/helpers'
 import {
@@ -50,8 +50,9 @@ export class UserService implements IUserService {
     return createToken(result[0])
   }
 
-  async getProfile (id: number): Promise<any> {
+  async profile (id: number): Promise<TUserProfile[]> {
     const result = await this.userRepository.getById(id)
     if (!result.length) await validateError(new UserNotFoundError())
+    return result
   }
 }

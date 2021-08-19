@@ -69,3 +69,19 @@ export class UserTokenError extends Error {
     this.stack = 'token'
   }
 }
+
+export class UserDisabledAccountError extends Error {
+  constructor () {
+    super('A sua conta está desativada!')
+    this.name = 'UserDisabledAccountError'
+    this.stack = 'token'
+  }
+}
+
+export class UserAccessNotAllowedError extends Error {
+  constructor () {
+    super('Acesso não permitido!')
+    this.name = 'UserAccessNotAllowedError'
+    this.stack = 'route'
+  }
+}

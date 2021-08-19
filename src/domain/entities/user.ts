@@ -9,3 +9,15 @@ export type TUserCreate = {
   level: number
   photo: string
 }
+
+export type TUserProfile = {
+  id: number
+  name: string
+  email: string
+  password: string
+  active: boolean
+  photo: string
+  level: number
+  created_at: Date
+  updated_at: Date
+}

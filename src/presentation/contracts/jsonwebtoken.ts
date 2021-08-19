@@ -4,6 +4,7 @@ export type TJwT = {
   email: string
   level: string
   photo: string
+  active: boolean
 }
 
 export type TCreateToken = {
@@ -16,7 +17,8 @@ export type TCreateToken = {
 
 export type TJwTPayload = {
   id: number
-  level: string
+  level: number
+  active: boolean
   iat: number
   exp: number
 }

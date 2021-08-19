@@ -27,8 +27,10 @@ export type TUserSearch = {
   updated_at: Date
 }
 
+export type TUserProfile = TUserSearch
+
 export interface IUserRepository {
   toCreate: (dataForm: TUser) => Promise<TUserCreate>
   searchEmail: (email: string) => Promise<TUserSearch[]>
-  getById: (id: number) => Promise<object[]>
+  getById: (id: number) => Promise<TUserProfile[]>
 }
