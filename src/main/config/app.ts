@@ -7,6 +7,7 @@ import cors from 'cors'
 import errorHandler from '@/main/config/errors/handler'
 import { Connection } from '@/main/config/conn'
 import { setupRoutes } from '@/main/config/routes'
+import { createObjectCustomError } from '@/presentation/helpers'
 
 class App {
   app: express.Express
@@ -24,6 +25,9 @@ class App {
     setupRoutes(this.app)
     this.app.use(helmet())
     this.app.use(errorHandler.handler)
+    this.app.use(function (req, res, next) {
+      res.status(404).json(createObjectCustomError('url', 'URL não encontrada!'))
+    })
   }
 }
 

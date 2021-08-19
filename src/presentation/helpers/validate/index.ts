@@ -16,5 +16,4 @@ export const validateError = async (data: any): Promise<void> => {
 }
 
 export const createObjectError = (property: any, message: string): object => ({ property , message })
-
 export const createObjectCustomError = (property: string, message: string): object => ({ error: [{ property, message }] })
