@@ -8,9 +8,17 @@ export class UserInvalidError extends Error {
 
 export class UserExistingEmailError extends Error {
   constructor () {
-    super('E-mail informado já existe!')
+    super('E-mail informado em uso!')
     this.name = 'UserExistingEmailError'
     this.stack = 'email'
+  }
+}
+
+export class UserEmptyNameError extends Error {
+  constructor () {
+    super('O campo "Nome" não pode ser vazio!')
+    this.name = 'UserEmptyNameError'
+    this.stack = 'name'
   }
 }
 
@@ -83,5 +91,13 @@ export class UserAccessNotAllowedError extends Error {
     super('Acesso não permitido!')
     this.name = 'UserAccessNotAllowedError'
     this.stack = 'route'
+  }
+}
+
+export class UserNotUpdatedError extends Error {
+  constructor () {
+    super('Não foi possível atualizar o usuário!')
+    this.name = 'UserAccessNotAllowedError'
+    this.stack = 'user'
   }
 }

@@ -20,4 +20,10 @@ export class UserRepository implements IUserRepository {
   async getById (id: number): Promise<TUserProfile[]> {
     return getRepository(UserDAO).find({ where: { id } })
   }
+
+  async toUpdate (id: number, dataForm: any): Promise<any> {
+    const x = await getRepository(UserDAO).update(id, dataForm)
+    console.log('UserRepository => ', x)
+    return x
+  }
 }

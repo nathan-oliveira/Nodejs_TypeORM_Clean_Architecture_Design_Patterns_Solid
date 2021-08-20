@@ -1,18 +1,25 @@
 import { IUserService } from '@/domain/usecases'
 import { UserDAO } from '@/infra/data-sources'
+import { TBCrypt } from '@/presentation/contracts'
 import { TUserCreate, TUserLogin, TUserProfile } from '@/domain/entities'
 import { TUser, TUserRequest, IUserRepository } from '@/data/contracts'
-import { validateError, BCrypt, createToken } from '@/presentation/helpers'
+import { validateError, createToken } from '@/presentation/helpers'
 import {
   UserExistingEmailError,
   UserEmptyEmailError,
   UserEmptyPasswordError,
   UserInvalidError,
-  UserNotFoundError
+  UserNotFoundError,
+  UserNotUpdatedError,
+  UserEmptyNameError,
+  UserEmptyConfirmPasswordError
 } from '@/domain/errors'
 
 export class UserService implements IUserService {
-  constructor (private readonly userRepository: IUserRepository) {}
+  constructor (
+    private readonly userRepository: IUserRepository,
+    private readonly bCrypt: TBCrypt
+  ) {}
 
   async existEmail (email: string): Promise<void> {
     if (!email) await validateError(new UserEmptyEmailError())
@@ -28,7 +35,7 @@ export class UserService implements IUserService {
 
   async signUp (dataForm: TUser): Promise<TUserCreate> {
     await this.validateSignUp(dataForm)
-    dataForm.password = await BCrypt.createPasswordHash(dataForm.password, dataForm.password_confirmation)
+    dataForm.password = await this.bCrypt.createPasswordHash(dataForm.password, dataForm.password_confirmation)
     delete dataForm.password_confirmation
 
     return this.userRepository.toCreate(dataForm)
@@ -44,15 +51,35 @@ export class UserService implements IUserService {
 
     const result = await this.userRepository.searchEmail(dataForm.email)
     if (!result.length) await validateError(new UserInvalidError())
-
-    const compareUser = await BCrypt.comparePasswordHash(dataForm.password, result[0])
-    if (!compareUser) await validateError(new UserInvalidError())
+    const verifyUser = this.bCrypt.verifyPasswordHash(dataForm.password, result[0])
+    if (!verifyUser) await validateError(new UserInvalidError())
     return createToken(result[0])
   }
 
-  async profile (id: number): Promise<TUserProfile[]> {
+  async getProfile (id: number): Promise<TUserProfile[]> {
     const result = await this.userRepository.getById(id)
     if (!result.length) await validateError(new UserNotFoundError())
     return result
+  }
+
+  async validateProfile (dataForm: TUser): Promise<void> {
+    if (!dataForm.name) await validateError(new UserEmptyNameError())
+    if (!dataForm.email) await validateError(new UserEmptyEmailError())
+    if (!dataForm.password) await validateError(new UserEmptyPasswordError())
+    if (!dataForm.password_confirmation) await validateError(new UserEmptyConfirmPasswordError())
+  }
+
+  async updateProfile (id: number, dataForm: TUser): Promise<TUserProfile[]> {
+    await this.validateProfile(dataForm)
+
+    if (!dataForm.photo) dataForm.photo = '*'
+    if (dataForm.password) {
+      dataForm.password = await this.bCrypt.createPasswordHash(dataForm.password, dataForm.password_confirmation)
+      delete dataForm.password_confirmation
+    }
+
+    const result = await this.userRepository.toUpdate(id, dataForm)
+    if (result.affected !== 1) await validateError(new UserNotUpdatedError())
+    return this.getProfile(id)
   }
 }

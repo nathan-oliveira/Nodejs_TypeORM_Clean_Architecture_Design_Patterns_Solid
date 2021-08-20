@@ -9,7 +9,7 @@ export class ProfileController implements Controller {
     const { id } = http.user
 
     try {
-      const result = await this.userService.profile(id)
+      const result = await this.userService.getProfile(id)
       return ok(ProfileViewModel.getView(result))
     } catch (err) {
       return forbidden(err)
