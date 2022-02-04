@@ -10,7 +10,6 @@ import {
   UserEmptyPasswordError,
   UserInvalidError,
   UserNotFoundError,
-  UserNotUpdatedError,
   UserEmptyNameError,
   UserEmptyConfirmPasswordError
 } from '@/domain/errors'
@@ -69,7 +68,7 @@ export class UserService implements IUserService {
     if (!dataForm.password_confirmation) await validateError(new UserEmptyConfirmPasswordError())
   }
 
-  async updateProfile (id: number, dataForm: TUser): Promise<TUserProfile[]> {
+  async updateProfile (id: number, dataForm: TUser): Promise<TUserProfile> {
     const [profile] = await this.getProfile(id)
 
     if (dataForm.password) {
@@ -77,7 +76,6 @@ export class UserService implements IUserService {
       delete dataForm.password_confirmation
     }
 
-    // if (result.affected !== 1) await validateError(new UserNotUpdatedError())
     return await this.userRepository.toUpdate(id, dataForm, profile)
   }
 }
