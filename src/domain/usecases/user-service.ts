@@ -6,7 +6,7 @@ export interface IUserService {
   signUp: (dataForm: TUser) => Promise<TUserCreate>
   existEmail: (email: string) => Promise<void>
   login: (dataForm: TUserRequest) => Promise<TUserLogin>
-  getProfile: (id: number) => Promise<TUserProfile[]>
+  getProfile: (id: number) => Promise<TUserProfile>
   validateLogin: (dataForm: TUserRequest) => Promise<void>
   updateProfile: (id: number, dataForm: any) => Promise<TUserProfile>
 }

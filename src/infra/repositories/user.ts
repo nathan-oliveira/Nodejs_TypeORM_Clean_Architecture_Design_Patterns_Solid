@@ -27,7 +27,7 @@ export class UserRepository implements IUserRepository {
     return this.manager.find({ where: { id } })
   }
 
-  async toUpdate (id: number, dataForm: any, profile: any): Promise<any> {
+  async toUpdate (dataForm: any, profile: any): Promise<any> {
     this.manager.merge(profile, dataForm)
     return this.manager.save(profile)
   }

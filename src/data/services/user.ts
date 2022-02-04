@@ -9,9 +9,7 @@ import {
   UserEmptyEmailError,
   UserEmptyPasswordError,
   UserInvalidError,
-  UserNotFoundError,
-  UserEmptyNameError,
-  UserEmptyConfirmPasswordError
+  UserNotFoundError
 } from '@/domain/errors'
 
 export class UserService implements IUserService {
@@ -55,27 +53,28 @@ export class UserService implements IUserService {
     return createToken(result[0])
   }
 
-  async getProfile (id: number): Promise<TUserProfile[]> {
-    const result = await this.userRepository.getById(id)
-    if (!result.length) await validateError(new UserNotFoundError())
+  async getProfile (id: number): Promise<TUserProfile> {
+    const [result] = await this.userRepository.getById(id)
+    if (!result) await validateError(new UserNotFoundError())
     return result
   }
 
+  /*
   async validateProfile (dataForm: TUser): Promise<void> {
     if (!dataForm.name) await validateError(new UserEmptyNameError())
     if (!dataForm.email) await validateError(new UserEmptyEmailError())
     if (!dataForm.password) await validateError(new UserEmptyPasswordError())
     if (!dataForm.password_confirmation) await validateError(new UserEmptyConfirmPasswordError())
   }
+  */
 
   async updateProfile (id: number, dataForm: TUser): Promise<TUserProfile> {
-    const [profile] = await this.getProfile(id)
-
     if (dataForm.password) {
       dataForm.password = await this.bCrypt.createPasswordHash(dataForm.password, dataForm.password_confirmation)
       delete dataForm.password_confirmation
     }
 
-    return await this.userRepository.toUpdate(id, dataForm, profile)
+    const profile = await this.getProfile(id)
+    return await this.userRepository.toUpdate(dataForm, profile)
   }
 }

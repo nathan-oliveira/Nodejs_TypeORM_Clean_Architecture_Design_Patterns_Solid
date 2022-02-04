@@ -10,7 +10,7 @@ export class LoginController implements Controller {
 
     try {
       const result = await this.userService.login({ email, password })
-      return ok(result)
+      return ok(LoginViewModel.getView(result))
     } catch (err) {
       return forbidden(err)
     }

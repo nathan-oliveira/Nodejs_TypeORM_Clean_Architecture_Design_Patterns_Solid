@@ -19,7 +19,24 @@ export class SignUpViewModel {
   }
 }
 
-export type LoginViewModel = TCreateToken
+// implements TCreateToken
+export class LoginViewModel {
+  name: string
+  email: string
+  level: string
+  photo: string
+  token: string
+
+  static getView (entity: TCreateToken): LoginViewModel {
+    return {
+      name: entity.name,
+      email: entity.email,
+      level: entity.level,
+      photo: entity.photo,
+      token: entity.token
+    }
+  }
+}
 
 export class ProfileViewModel {
   id: number
