@@ -59,15 +59,6 @@ export class UserService implements IUserService {
     return result
   }
 
-  /*
-  async validateProfile (dataForm: TUser): Promise<void> {
-    if (!dataForm.name) await validateError(new UserEmptyNameError())
-    if (!dataForm.email) await validateError(new UserEmptyEmailError())
-    if (!dataForm.password) await validateError(new UserEmptyPasswordError())
-    if (!dataForm.password_confirmation) await validateError(new UserEmptyConfirmPasswordError())
-  }
-  */
-
   async updateProfile (id: number, dataForm: TUser): Promise<TUserProfile> {
     if (dataForm.password) {
       dataForm.password = await this.bCrypt.createPasswordHash(dataForm.password, dataForm.password_confirmation)
