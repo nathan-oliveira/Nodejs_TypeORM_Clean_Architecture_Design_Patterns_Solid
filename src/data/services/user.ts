@@ -76,7 +76,8 @@ export class UserService implements IUserService {
       dataForm.password = await this.bCrypt.createPasswordHash(dataForm.password, dataForm.password_confirmation)
       delete dataForm.password_confirmation
     }
+
     // if (result.affected !== 1) await validateError(new UserNotUpdatedError())
-    return this.userRepository.toUpdate(id, dataForm, profile)
+    return await this.userRepository.toUpdate(id, dataForm, profile)
   }
 }

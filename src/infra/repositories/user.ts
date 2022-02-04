@@ -10,12 +10,15 @@ import {
 } from '@/data/contracts'
 
 export class UserRepository implements IUserRepository {
-  constructor (private readonly manager: Repository<UserDAO> = getRepository(UserDAO)) {
-  }
+  // constructor (
+  //   private readonly manager: Repository<UserDAO> = getRepository(UserDAO)
+  // ) {}
 
   async toCreate (dataForm: TUser): Promise<TUserCreate> {
-    const user = this.manager.create(dataForm)
-    return this.manager.save(user)
+    // const user = this.manager.create(dataForm)
+    // return this.manager.save(user)
+    const user = getRepository(UserDAO).create(dataForm)
+    return getRepository(UserDAO).save(user)
   }
 
   async searchEmail (email: string): Promise<TUserSearch[]> {
@@ -27,6 +30,7 @@ export class UserRepository implements IUserRepository {
   }
 
   async toUpdate (id: number, dataForm: any, profile: any): Promise<any> {
+    // this.manager.merge(profile, dataForm)
     getRepository(UserDAO).merge(profile, dataForm)
     return getRepository(UserDAO).save(profile)
   }

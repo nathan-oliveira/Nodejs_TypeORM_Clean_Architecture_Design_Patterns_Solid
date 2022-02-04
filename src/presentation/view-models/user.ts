@@ -29,7 +29,7 @@ export class ProfileViewModel {
   photo: string
   level: number
 
-  static getView ([entity]: TUserProfile[]): ProfileViewModel {
+  static getView (entity: TUserProfile): ProfileViewModel {
     return {
       id: entity.id,
       name: entity.name,
