@@ -33,5 +33,5 @@ export interface IUserRepository {
   toCreate: (dataForm: TUser) => Promise<TUserCreate>
   searchEmail: (email: string) => Promise<TUserSearch[]>
   getById: (id: number) => Promise<TUserProfile[]>
-  toUpdate: (id: number, dataForm: any) => Promise<any>
+  toUpdate: (id: number, dataForm: any, profile: any) => Promise<any>
 }

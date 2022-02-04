@@ -70,16 +70,13 @@ export class UserService implements IUserService {
   }
 
   async updateProfile (id: number, dataForm: TUser): Promise<TUserProfile[]> {
-    await this.validateProfile(dataForm)
+    const [profile] = await this.getProfile(id)
 
-    if (!dataForm.photo) dataForm.photo = '*'
     if (dataForm.password) {
       dataForm.password = await this.bCrypt.createPasswordHash(dataForm.password, dataForm.password_confirmation)
       delete dataForm.password_confirmation
     }
-
-    const result = await this.userRepository.toUpdate(id, dataForm)
-    if (result.affected !== 1) await validateError(new UserNotUpdatedError())
-    return this.getProfile(id)
+    // if (result.affected !== 1) await validateError(new UserNotUpdatedError())
+    return this.userRepository.toUpdate(id, dataForm, profile)
   }
 }

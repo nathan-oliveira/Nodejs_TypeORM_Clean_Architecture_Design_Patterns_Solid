@@ -1,5 +1,6 @@
 import conn from '@/infra/database'
+import { Connection } from 'typeorm'
 
-export const Connection = (): void => {
-  conn.then(async (resp) => conn).catch((err) => console.error(err))
+export const Conn = async (): Promise<Connection> => {
+  return await conn
 }

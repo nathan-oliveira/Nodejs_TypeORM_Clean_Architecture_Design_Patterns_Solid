@@ -5,7 +5,7 @@ import helmet from 'helmet'
 import cors from 'cors'
 
 import errorHandler from '@/main/config/errors/handler'
-import { Connection } from '@/main/config/conn'
+import { Conn as Connection } from '@/main/config/conn'
 import { setupRoutes } from '@/main/config/routes'
 import { createObjectCustomError } from '@/presentation/helpers'
 
@@ -14,11 +14,11 @@ class App {
 
   constructor () {
     this.app = express()
-    this.middleware()
+    this.middleware() // eslint-disable-line
   }
 
-  private middleware (): any {
-    Connection()
+  private async middleware (): Promise<void> {
+    await Connection()
     this.app.use(cors())
     this.app.use(express.urlencoded({ extended: true }))
     this.app.use(express.json({ limit: '20mb' }))

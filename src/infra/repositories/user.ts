@@ -1,4 +1,4 @@
-import { getRepository } from 'typeorm'
+import { getRepository, Repository } from 'typeorm'
 
 import { UserDAO } from '@/infra/data-sources'
 import { TUserCreate } from '@/domain/entities'
@@ -8,9 +8,14 @@ import {
   TUserSearch,
   TUserProfile
 } from '@/data/contracts'
+
 export class UserRepository implements IUserRepository {
+  constructor (private readonly manager: Repository<UserDAO> = getRepository(UserDAO)) {
+  }
+
   async toCreate (dataForm: TUser): Promise<TUserCreate> {
-    return getRepository(UserDAO).save(dataForm)
+    const user = this.manager.create(dataForm)
+    return this.manager.save(user)
   }
 
   async searchEmail (email: string): Promise<TUserSearch[]> {
@@ -21,9 +26,8 @@ export class UserRepository implements IUserRepository {
     return getRepository(UserDAO).find({ where: { id } })
   }
 
-  async toUpdate (id: number, dataForm: any): Promise<any> {
-    const x = await getRepository(UserDAO).update(id, dataForm)
-    console.log('UserRepository => ', x)
-    return x
+  async toUpdate (id: number, dataForm: any, profile: any): Promise<any> {
+    getRepository(UserDAO).merge(profile, dataForm)
+    return getRepository(UserDAO).save(profile)
   }
 }
