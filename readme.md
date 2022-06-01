@@ -1,4 +1,4 @@
-## Backend: Nodejs, TypeORM, TDD, Clean Architecture, Design Patterns e SOLID
+## Backend de Finanças: Nodejs, TypeORM, TDD, Clean Architecture, Design Patterns e SOLID
 
 ## Helps
 npm run typeorm -- migration:create -n create-teste
