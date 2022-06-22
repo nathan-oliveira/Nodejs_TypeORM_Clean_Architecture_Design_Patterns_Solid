@@ -57,3 +57,13 @@ export class ProfileViewModel {
     }
   }
 }
+
+export class ProfileViewProfileModel {
+  photo: string
+
+  static getView(entity: TUserProfile): ProfileViewProfileModel {
+    return {
+      photo: entity.photo,
+    }
+  }
+}
