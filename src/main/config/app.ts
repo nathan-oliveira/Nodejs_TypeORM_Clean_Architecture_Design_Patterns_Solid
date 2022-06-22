@@ -12,12 +12,12 @@ import { createObjectCustomError } from '@/presentation/helpers'
 class App {
   app: express.Express
 
-  constructor () {
+  constructor() {
     this.app = express()
     this.middleware() // eslint-disable-line
   }
 
-  private async middleware (): Promise<void> {
+  private async middleware(): Promise<void> {
     await Connection()
     this.app.use(cors())
     this.app.use(express.urlencoded({ extended: true }))

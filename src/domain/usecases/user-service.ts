@@ -8,5 +8,6 @@ export interface IUserService {
   login: (dataForm: TUserRequest) => Promise<TUserLogin>
   getProfile: (id: number) => Promise<TUserProfile>
   validateLogin: (dataForm: TUserRequest) => Promise<void>
-  updateProfile: (id: number, dataForm: any) => Promise<TUserProfile>
+  updateProfile: (id: number, dataForm: TUser) => Promise<TUserProfile>
+  updatePhoto: (id: number, dataForm: any) => Promise<any>
 }

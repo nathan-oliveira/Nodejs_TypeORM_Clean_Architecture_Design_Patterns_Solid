@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/main/server.js",
     "build": "rimraf dist && tsc",
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules -r tsconfig-paths/register src/main/server.ts",
+    "start:dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules -r tsconfig-paths/register src/main/server.ts",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config ./src/main/config/orm.ts"
   },
   "license": "ISC",

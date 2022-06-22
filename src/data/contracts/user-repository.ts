@@ -15,6 +15,10 @@ export type TUser = {
   level?: number
 }
 
+export type TUserPhoto = {
+  photo: string
+};
+
 export type TUserSearch = {
   id: number
   name: string
@@ -33,5 +37,6 @@ export interface IUserRepository {
   toCreate: (dataForm: TUser) => Promise<TUserCreate>
   searchEmail: (email: string) => Promise<TUserSearch[]>
   getById: (id: number) => Promise<TUserProfile[]>
-  toUpdate: (dataForm: any, profile: any) => Promise<any>
+  toUpdate: (dataForm: TUser, profile: any) => Promise<TUserProfile>
+  toUpdatePhoto: (dataForm: TUserPhoto, profile: any) => Promise<TUserProfile>
 }

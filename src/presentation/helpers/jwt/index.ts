@@ -28,7 +28,7 @@ export const accessControl = async (req: Request, res: Response, next: NextFunct
 
     (<any>req).user = { id, level, active }
     next()
-  } catch (err) {
+  } catch (err: any) {
     res.status(401).json({ error: err.message })
   }
   // if (exclusions.includes(req.url)) {
