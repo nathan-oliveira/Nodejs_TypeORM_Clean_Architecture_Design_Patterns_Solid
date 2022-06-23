@@ -7,7 +7,7 @@ import {
   Column
 } from 'typeorm'
 
-import { IsEmail, Length } from 'class-validator'
+import { IsNotEmpty, IsEmail, Length } from 'class-validator'
 
 @Entity('users')
 class UserDAO extends BaseEntity {
@@ -30,6 +30,7 @@ class UserDAO extends BaseEntity {
   active: boolean
 
   @Column('text')
+  @IsNotEmpty({ message: 'Campo "photo" não pode ser vazio!' })
   photo: string
 
   @Column({ default: 0 })

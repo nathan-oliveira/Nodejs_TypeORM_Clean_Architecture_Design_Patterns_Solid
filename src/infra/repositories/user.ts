@@ -15,26 +15,25 @@ export class UserRepository implements IUserRepository {
     private readonly manager: Repository<UserDAO> = getRepository(UserDAO)
   ) { }
 
-
-  async toCreate(dataForm: TUser): Promise<TUserCreate> {
+  toCreate(dataForm: TUser): Promise<TUserCreate> {
     const user = this.manager.create(dataForm)
     return this.manager.save(user)
   }
 
-  async searchEmail(email: string): Promise<TUserSearch[]> {
+  searchEmail(email: string): Promise<TUserSearch[]> {
     return this.manager.find({ where: { email } })
   }
 
-  async getById(id: number): Promise<TUserProfile[]> {
+  getById(id: number): Promise<TUserProfile[]> {
     return this.manager.find({ where: { id } })
   }
 
-  async toUpdate(dataForm: TUser, profile: UserDAO): Promise<TUserProfile> {
+  toUpdate(dataForm: TUser, profile: UserDAO): Promise<TUserProfile> {
     this.manager.merge(profile, dataForm)
     return this.manager.save(profile)
   }
 
-  async toUpdatePhoto({ photo }: TUserPhoto, profile: UserDAO): Promise<TUserProfile> {
+  toUpdatePhoto({ photo }: TUserPhoto, profile: UserDAO): Promise<TUserProfile> {
     this.manager.merge(profile, { photo })
     return this.manager.save(profile)
   }
