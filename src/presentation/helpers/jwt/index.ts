@@ -41,13 +41,13 @@ export const accessControl = async (req: Request, res: Response, next: NextFunct
 const verifyRouteValid = async (level: number, path: string): Promise<any> => {
   const exclusions = {
     client: {
-      routes: ['/profile'],
+      routes: ['/profile', '/category'],
       level: 0
     }
   }
 
   const validLevelClient = exclusions.client.level === level
-  let validRouteClient
+  let validRouteClient = false;
   exclusions.client.routes.forEach((route) => {
     if (route === path) {
       validRouteClient = true

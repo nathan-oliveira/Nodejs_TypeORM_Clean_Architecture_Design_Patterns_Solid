@@ -1,14 +1,8 @@
 import { getRepository, Repository } from 'typeorm'
 
 import { UserDAO } from '@/infra/data-sources'
-import { TUserCreate } from '@/domain/entities'
-import {
-  TUser,
-  IUserRepository,
-  TUserSearch,
-  TUserProfile,
-  TUserPhoto
-} from '@/data/contracts'
+import { TUserCreate, TUserProfile } from '@/domain/entities'
+import { TUser, TUserPhoto, IUserRepository } from '@/data/contracts'
 
 export class UserRepository implements IUserRepository {
   constructor(
@@ -20,7 +14,7 @@ export class UserRepository implements IUserRepository {
     return this.manager.save(user)
   }
 
-  searchEmail(email: string): Promise<TUserSearch[]> {
+  searchEmail(email: string): Promise<TUserProfile[]> {
     return this.manager.find({ where: { email } })
   }
 

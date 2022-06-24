@@ -1,13 +1,10 @@
 import { getRepository, Repository } from 'typeorm'
 
-import { TCategory } from '@/domain/entities'
 import { CategoryDAO } from '@/infra/data-sources'
+import { TCategory } from '@/domain/entities'
+import { ICategoryRepository } from '@/data/contracts'
 
-// import {
-//   ICategoryRepository
-// } from '@/data/contracts'
-
-export class CategoryRepository {
+export class CategoryRepository implements ICategoryRepository {
   constructor(
     private readonly manager: Repository<CategoryDAO> = getRepository(CategoryDAO)
   ) { }
