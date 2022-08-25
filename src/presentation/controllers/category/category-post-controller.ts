@@ -7,6 +7,7 @@ export class CategoryPostController implements Controller {
 
   async handle(http: HttpRequest): Promise<HttpResponse<CategoryPostViewModel>> {
     const { name, icon } = http.body
+
     try {
       const result = await this.categoryService.create({ name, icon })
       return ok(CategoryPostViewModel.getView(result))

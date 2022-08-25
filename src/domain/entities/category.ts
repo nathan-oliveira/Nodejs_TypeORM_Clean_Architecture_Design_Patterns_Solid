@@ -5,3 +5,8 @@ export type TCategory = {
   created_at: Date
   updated_at: Date
 }
+
+export type TCategoryCreate = {
+  name: string
+  icon: string
+}

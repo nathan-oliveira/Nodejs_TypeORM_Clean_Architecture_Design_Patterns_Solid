@@ -1,6 +1,6 @@
-import { TCategory } from '@/domain/entities'
+import { TCategory, TCategoryCreate } from '@/domain/entities'
 import { ICategoryService } from '@/domain/usecases'
-import { ICategoryRepository } from '@/data/contracts'
+import { ICategoryRepository, TCategoryRequest } from '@/data/contracts'
 import { validateError } from '@/presentation/helpers'
 import { CategoryNotFoundError } from '@/domain/errors/category'
 
@@ -19,7 +19,7 @@ export class CategoryService implements ICategoryService {
     return result
   }
 
-  async create(dataForm: any): Promise<any> {
+  async create(dataForm: TCategoryRequest): Promise<TCategoryCreate> {
     return this.categoryRepository.toCreate(dataForm)
   }
 }

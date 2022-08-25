@@ -1,4 +1,5 @@
 import { TUserCreate, TUserProfile } from '@/domain/entities'
+import { UserDAO } from '@/infra/data-sources'
 
 export type TUserRequest = {
   email: string
@@ -15,6 +16,18 @@ export type TUser = {
   level?: number
 }
 
+export type TUserProfileDAO = {
+  id: number
+  name: string
+  email: string
+  password: string
+  active: boolean
+  photo: string
+  level: number
+  created_at: Date
+  updated_at: Date
+}
+
 export type TUserPhoto = {
   photo: string
 }
@@ -23,6 +36,6 @@ export interface IUserRepository {
   toCreate: (dataForm: TUser) => Promise<TUserCreate>
   searchEmail: (email: string) => Promise<TUserProfile[]>
   getById: (id: number) => Promise<TUserProfile[]>
-  toUpdate: (dataForm: TUser, profile: any) => Promise<TUserProfile>
-  toUpdatePhoto: (dataForm: TUserPhoto, profile: any) => Promise<TUserProfile>
+  toUpdate: (dataForm: TUser, profile: TUserProfile) => Promise<TUserProfile>
+  toUpdatePhoto: (dataForm: TUserPhoto, profile: TUserProfile) => Promise<TUserProfile>
 }

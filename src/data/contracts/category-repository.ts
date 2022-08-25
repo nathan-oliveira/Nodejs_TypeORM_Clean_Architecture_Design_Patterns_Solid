@@ -1,7 +1,12 @@
-import { TCategory } from '@/domain/entities'
+import { TCategory, TCategoryCreate } from '@/domain/entities'
+
+export type TCategoryRequest = {
+  name: string
+  icon: string
+}
 
 export interface ICategoryRepository {
   getAll: () => Promise<TCategory[]>
   getById: (id: number) => Promise<TCategory[]>
-  toCreate: (dataForm: any) => Promise<any>
+  toCreate: (dataForm: TCategoryRequest) => Promise<TCategoryCreate>
 }

@@ -24,13 +24,13 @@ export class UserRepository implements IUserRepository {
     return this.manager.find({ where: { id } })
   }
 
-  async toUpdate(dataForm: TUser, profile: UserDAO): Promise<TUserProfile> {
-    this.manager.merge(profile, dataForm)
+  async toUpdate(dataForm: TUser, profile: TUserProfile): Promise<TUserProfile> {
+    this.manager.merge(profile as UserDAO, dataForm)
     return this.manager.save(profile)
   }
 
-  async toUpdatePhoto({ photo }: TUserPhoto, profile: UserDAO): Promise<TUserProfile> {
-    this.manager.merge(profile, { photo })
+  async toUpdatePhoto({ photo }: TUserPhoto, profile: TUserProfile): Promise<TUserProfile> {
+    this.manager.merge(profile as UserDAO, { photo })
     return this.manager.save(profile)
   }
 }

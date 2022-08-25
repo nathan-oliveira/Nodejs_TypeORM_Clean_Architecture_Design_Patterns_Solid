@@ -1,8 +1,8 @@
 import { getRepository, Repository } from 'typeorm'
 
 import { CategoryDAO } from '@/infra/data-sources'
-import { TCategory } from '@/domain/entities'
-import { ICategoryRepository } from '@/data/contracts'
+import { TCategory, TCategoryCreate } from '@/domain/entities'
+import { ICategoryRepository, TCategoryRequest } from '@/data/contracts'
 import { validateError } from '@/presentation/helpers'
 
 export class CategoryRepository implements ICategoryRepository {
@@ -18,7 +18,7 @@ export class CategoryRepository implements ICategoryRepository {
     return this.manager.find({ where: { id } })
   }
 
-  async toCreate(dataForm: any): Promise<any> {
+  async toCreate(dataForm: TCategoryRequest): Promise<TCategoryCreate> {
     const category = this.manager.create(dataForm)
     await validateError(category)
     return this.manager.save(category)
