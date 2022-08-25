@@ -1,15 +1,15 @@
-import { TCategory } from "@/domain/entities"
+import { TCategory } from '@/domain/entities'
 
 export class CategoryGetAllViewModel {
   id: number
   name: string
   icon: string
 
-  static getView(entity: TCategory[]): CategoryGetAllViewModel[] {
+  static getView (entity: TCategory[]): CategoryGetAllViewModel[] {
     return entity.map((item) => ({
       id: item.id,
       name: item.name,
-      icon: item.icon,
+      icon: item.icon
     }))
   }
 }
@@ -19,11 +19,11 @@ export class CategoryGetByIdViewModel {
   name: string
   icon: string
 
-  static getView(entity: TCategory): CategoryGetAllViewModel {
+  static getView (entity: TCategory): CategoryGetAllViewModel {
     return {
       id: entity.id,
       name: entity.name,
-      icon: entity.icon,
-    };
+      icon: entity.icon
+    }
   }
 }

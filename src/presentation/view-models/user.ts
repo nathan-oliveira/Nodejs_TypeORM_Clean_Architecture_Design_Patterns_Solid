@@ -8,7 +8,7 @@ export class SignUpViewModel {
   level: number
   photo: string
 
-  static getView(entity: TUserCreate): SignUpViewModel {
+  static getView (entity: TUserCreate): SignUpViewModel {
     return {
       name: entity.name,
       email: entity.email,
@@ -27,7 +27,7 @@ export class LoginViewModel {
   photo: string
   token: string
 
-  static getView(entity: TCreateToken): LoginViewModel {
+  static getView (entity: TCreateToken): LoginViewModel {
     return {
       name: entity.name,
       email: entity.email,
@@ -46,7 +46,7 @@ export class ProfileViewModel {
   photo: string
   level: number
 
-  static getView(entity: TUserProfile): ProfileViewModel {
+  static getView (entity: TUserProfile): ProfileViewModel {
     return {
       id: entity.id,
       name: entity.name,
@@ -61,9 +61,9 @@ export class ProfileViewModel {
 export class ProfileViewProfileModel {
   photo: string
 
-  static getView(entity: TUserProfile): ProfileViewProfileModel {
+  static getView (entity: TUserProfile): ProfileViewProfileModel {
     return {
-      photo: entity.photo,
+      photo: entity.photo
     }
   }
 }

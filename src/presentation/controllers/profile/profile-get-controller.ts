@@ -3,9 +3,9 @@ import { IUserService } from '@/domain/usecases'
 import { ProfileViewModel } from '@/presentation/view-models'
 
 export class ProfileGetController implements Controller {
-  constructor(private readonly userService: IUserService) { }
+  constructor (private readonly userService: IUserService) { }
 
-  async handle(http: HttpRequest): Promise<HttpResponse<ProfileViewModel>> {
+  async handle (http: HttpRequest): Promise<HttpResponse<ProfileViewModel>> {
     const { id } = http.user
 
     try {

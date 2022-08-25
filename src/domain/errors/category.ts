@@ -1,5 +1,5 @@
 export class CategoryNotFoundError extends Error {
-  constructor() {
+  constructor () {
     super('Categoria não encontrada!')
     this.name = 'CategoryNotFoundError'
     this.stack = 'category'

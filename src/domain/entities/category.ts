@@ -4,4 +4,4 @@ export type TCategory = {
   icon: string
   created_at: Date
   updated_at: Date
-};
+}

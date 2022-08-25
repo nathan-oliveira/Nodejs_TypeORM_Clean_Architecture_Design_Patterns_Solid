@@ -4,7 +4,7 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  Column,
+  Column
 } from 'typeorm'
 
 import { IsNotEmpty, Length } from 'class-validator'

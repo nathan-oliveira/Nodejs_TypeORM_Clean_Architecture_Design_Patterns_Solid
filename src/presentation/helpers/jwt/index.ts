@@ -46,15 +46,15 @@ const verifyRouteValid = async (level: number, path: string, method: string): Pr
     }
   }
 
-  let validRouteClient = false;
+  let validRouteClient = false
 
   if (exclusions.client.level === level) {
     exclusions.client.routes.forEach((route) => {
       if (route === path) validRouteClient = true
-      const pathIncludeId = path.includes(route) && /[\/][0-9]{1,}/g.test(path);
+      const pathIncludeId = path.includes(route) && /[\/][0-9]{1,}/g.test(path) // eslint-disable-line
       if (pathIncludeId) validRouteClient = true
     })
   }
 
-  return validRouteClient;
+  return validRouteClient
 }

@@ -4,7 +4,7 @@ import { accessControl } from '@/presentation/helpers'
 import {
   makeProfileGetController,
   makeProfilePutController,
-  makeProfilePatchController,
+  makeProfilePatchController
 } from '@/main/factories'
 
 export default (router: Router): void => {

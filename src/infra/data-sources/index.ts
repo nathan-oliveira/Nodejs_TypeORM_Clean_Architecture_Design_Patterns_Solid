@@ -3,5 +3,5 @@ import CategoryDAO from './category'
 
 export {
   UserDAO,
-  CategoryDAO,
+  CategoryDAO
 }

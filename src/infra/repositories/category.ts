@@ -5,15 +5,15 @@ import { TCategory } from '@/domain/entities'
 import { ICategoryRepository } from '@/data/contracts'
 
 export class CategoryRepository implements ICategoryRepository {
-  constructor(
+  constructor (
     private readonly manager: Repository<CategoryDAO> = getRepository(CategoryDAO)
   ) { }
 
-  getAll(): Promise<TCategory[]> {
-    return this.manager.find();
+  async getAll (): Promise<TCategory[]> {
+    return this.manager.find()
   }
 
-  getById(id: number): Promise<TCategory[]> {
-    return this.manager.find({ where: { id } });
+  async getById (id: number): Promise<TCategory[]> {
+    return this.manager.find({ where: { id } })
   }
 }

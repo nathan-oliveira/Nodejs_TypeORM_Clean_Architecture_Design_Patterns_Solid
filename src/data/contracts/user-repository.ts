@@ -17,7 +17,7 @@ export type TUser = {
 
 export type TUserPhoto = {
   photo: string
-};
+}
 
 export interface IUserRepository {
   toCreate: (dataForm: TUser) => Promise<TUserCreate>
