@@ -13,3 +13,17 @@ export class CategoryGetAllViewModel {
     }))
   }
 }
+
+export class CategoryGetByIdViewModel {
+  id: number
+  name: string
+  icon: string
+
+  static getView(entity: TCategory): CategoryGetAllViewModel {
+    return {
+      id: entity.id,
+      name: entity.name,
+      icon: entity.icon,
+    };
+  }
+}

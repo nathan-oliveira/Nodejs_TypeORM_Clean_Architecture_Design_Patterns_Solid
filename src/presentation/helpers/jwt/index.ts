@@ -23,7 +23,7 @@ export const accessControl = async (req: Request, res: Response, next: NextFunct
     const { id, level, active } = jwt.verify(token, env.secret) as TJwTPayload
     if (!active) return await validateError(new UserDisabledAccountError())
 
-    const isRouteValid = await verifyRouteValid(level, req.url)
+    const isRouteValid = await verifyRouteValid(level, req.url, req.method)
     if (!isRouteValid) return await validateError(new UserAccessNotAllowedError());
 
     (<any>req).user = { id, level, active }
@@ -38,21 +38,23 @@ export const accessControl = async (req: Request, res: Response, next: NextFunct
   // }
 }
 
-const verifyRouteValid = async (level: number, path: string): Promise<any> => {
+const verifyRouteValid = async (level: number, path: string, method: string): Promise<boolean> => {
   const exclusions = {
     client: {
-      routes: ['/profile', '/category'],
+      routes: ['/profile', '/category'], // configurar methods
       level: 0
     }
   }
 
-  const validLevelClient = exclusions.client.level === level
   let validRouteClient = false;
-  exclusions.client.routes.forEach((route) => {
-    if (route === path) {
-      validRouteClient = true
-    }
-  })
 
-  return validLevelClient && validRouteClient
+  if (exclusions.client.level === level) {
+    exclusions.client.routes.forEach((route) => {
+      if (route === path) validRouteClient = true
+      const pathIncludeId = path.includes(route) && /[\/][0-9]{1,}/g.test(path);
+      if (pathIncludeId) validRouteClient = true
+    })
+  }
+
+  return validRouteClient;
 }

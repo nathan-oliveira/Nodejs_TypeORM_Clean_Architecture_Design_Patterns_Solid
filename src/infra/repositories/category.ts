@@ -12,4 +12,8 @@ export class CategoryRepository implements ICategoryRepository {
   getAll(): Promise<TCategory[]> {
     return this.manager.find();
   }
+
+  getById(id: number): Promise<TCategory[]> {
+    return this.manager.find({ where: { id } });
+  }
 }
