@@ -15,7 +15,7 @@ export const createToken = async (dataForm: any): Promise<TCreateToken> => {
 export const accessControl = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
   try {
     const auth = req.headers.authorization
-    if (!auth) return await validateError(new UserTokenError('Sem autorização!'))
+    if (!auth) return await validateError(new UserTokenError('Sem autenticação!'))
 
     const [, token] = auth.split(' ')
     if (!token) return await validateError(new UserTokenError('Token indefinido!'))

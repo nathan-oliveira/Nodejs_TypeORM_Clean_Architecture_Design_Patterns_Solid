@@ -5,7 +5,7 @@ export class CategoryGetAllViewModel {
   name: string
   icon: string
 
-  static getView(entity: TCategory[]): CategoryGetAllViewModel[] {
+  static getView (entity: TCategory[]): CategoryGetAllViewModel[] {
     return entity.map((item) => ({
       id: item.id,
       name: item.name,
@@ -19,7 +19,7 @@ export class CategoryGetByIdViewModel {
   name: string
   icon: string
 
-  static getView(entity: TCategory): CategoryGetAllViewModel {
+  static getView (entity: TCategory): CategoryGetAllViewModel {
     return {
       id: entity.id,
       name: entity.name,

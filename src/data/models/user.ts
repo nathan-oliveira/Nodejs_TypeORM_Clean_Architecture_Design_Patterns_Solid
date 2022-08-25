@@ -1,3 +1,3 @@
-import { TUserCreate } from '@/domain/entities'
+import { UserDAO } from '@/infra/data-sources'
 
-export type TUserCreateModel = TUserCreate
+export type TUserModel = UserDAO
