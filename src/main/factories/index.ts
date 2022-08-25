@@ -6,3 +6,5 @@ export * from './profile/make-profile-put-controller'
 export * from './profile/make-profile-patch-controller'
 
 export * from './category/make-category-get-controller'
+export * from './category/make-category-getbyid-controller'
+export * from './category/make-category-post-controller'
