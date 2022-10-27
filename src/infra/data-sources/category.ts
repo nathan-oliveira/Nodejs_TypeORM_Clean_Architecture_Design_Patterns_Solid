@@ -16,7 +16,7 @@ class CategoryDAO extends BaseEntity {
 
   @Column()
   @IsNotEmpty({ message: 'Campo "Nome" não pode ser vazio!' })
-  @Length(6, 255, { message: 'Campo "Nome" deve conter no mínimo 6 á 255 caracteres!' })
+  @Length(4, 255, { message: 'Campo "Nome" deve conter no mínimo 4 á 255 caracteres!' })
   name: string
 
   @Column('text')

@@ -1,4 +1,4 @@
-import { TCategory } from '@/domain/entities'
+import { TCategory, TCategoryCreate } from '@/domain/entities'
 
 export class CategoryGetAllViewModel {
   id: number
@@ -28,4 +28,17 @@ export class CategoryGetByIdViewModel {
   }
 }
 
-export class CategoryPostViewModel extends CategoryGetByIdViewModel { }
+export class CategoryPostViewModel {
+  name: string
+  icon: string
+
+  static getView (entity: TCategoryCreate): CategoryPostViewModel {
+    return {
+      name: entity.name,
+      icon: entity.icon
+    }
+  }
+}
+
+export class CategoryPutViewModel extends CategoryPostViewModel { }
+export class CategoryDeleteViewModel extends CategoryPostViewModel { }
