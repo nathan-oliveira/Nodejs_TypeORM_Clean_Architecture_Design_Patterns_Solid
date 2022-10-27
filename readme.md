@@ -16,4 +16,6 @@ npm run typeorm -- migration:run
 }
 ```
 
-Inspirada na arquitetura feita pelo Rodrigo Manguinho através da live [YouTube](https://www.youtube.com/watch?v=P0gpCCA8ZPs)
+```
+Arquitetura baseado através da Live do Rodrigo Manguinho [YouTube](https://www.youtube.com/watch?v=P0gpCCA8ZPs)
+```
