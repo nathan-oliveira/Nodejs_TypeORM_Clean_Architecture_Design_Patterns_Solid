@@ -15,7 +15,3 @@ npm run typeorm -- migration:run
   "@": "dist"
 }
 ```
-
-```
-Arquitetura baseado através da Live do Rodrigo Manguinho [YouTube](https://www.youtube.com/watch?v=P0gpCCA8ZPs)
-```
