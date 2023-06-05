@@ -10,7 +10,7 @@ import {
 import { IsNotEmpty, Length } from 'class-validator'
 
 @Entity('category')
-class CategoryDAO extends BaseEntity {
+export class CategoryDAO extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number
 
@@ -29,5 +29,3 @@ class CategoryDAO extends BaseEntity {
   @UpdateDateColumn()
   updated_at: Date
 }
-
-export default CategoryDAO

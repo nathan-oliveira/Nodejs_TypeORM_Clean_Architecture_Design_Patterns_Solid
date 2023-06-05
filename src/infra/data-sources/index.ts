@@ -1,7 +1,3 @@
-import UserDAO from './user'
-import CategoryDAO from './category'
-
-export {
-  UserDAO,
-  CategoryDAO
-}
+export * from './user'
+export * from './category'
+export * from './goal'

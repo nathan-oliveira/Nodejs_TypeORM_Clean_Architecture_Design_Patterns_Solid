@@ -10,7 +10,7 @@ import {
 import { IsNotEmpty, IsEmail, Length } from 'class-validator'
 
 @Entity('users')
-class UserDAO extends BaseEntity {
+export class UserDAO extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number
 
@@ -42,5 +42,3 @@ class UserDAO extends BaseEntity {
   @UpdateDateColumn()
   updated_at: Date
 }
-
-export default UserDAO

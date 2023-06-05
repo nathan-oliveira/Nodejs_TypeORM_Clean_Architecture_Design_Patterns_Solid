@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { adaptRoute } from '@/main/adapters'
-import { accessControl } from '@/presentation/helpers'
+import { accessControl } from '@/presentation/middlewares'
 import {
   makeCategoryGetController,
   makeCategoryGetByIdController,

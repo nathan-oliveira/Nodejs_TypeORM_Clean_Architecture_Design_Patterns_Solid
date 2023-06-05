@@ -5,28 +5,28 @@ import { TCategoryModel } from '@/data/models'
 import { ICategoryRepository, TCategoryRequest } from '@/data/contracts'
 
 import { validateError } from '@/presentation/helpers'
-import { CategoryNotFoundError } from '@/domain/errors/category'
+import { CategoryNotFoundError } from '@/domain/errors'
 
 export class CategoryRepository implements ICategoryRepository {
-  constructor (
+  constructor(
     private readonly manager: Repository<CategoryDAO> = getRepository(CategoryDAO)
   ) { }
 
-  async getAll (): Promise<TCategoryModel[]> {
+  async getAll(): Promise<TCategoryModel[]> {
     return this.manager.find()
   }
 
-  async getById (id: number): Promise<TCategoryModel[]> {
+  async getById(id: number): Promise<TCategoryModel[]> {
     return this.manager.find({ where: { id } })
   }
 
-  async toCreate (dataForm: TCategoryRequest): Promise<TCategoryModel> {
+  async toCreate(dataForm: TCategoryRequest): Promise<TCategoryModel> {
     const category = this.manager.create(dataForm)
     await validateError(category)
     return this.manager.save(category)
   }
 
-  async toUpdate (id: number, dataForm: TCategoryRequest): Promise<TCategoryModel> {
+  async toUpdate(id: number, dataForm: TCategoryRequest): Promise<TCategoryModel> {
     const category = await this.manager.preload({
       ...dataForm,
       id: +id
@@ -36,7 +36,7 @@ export class CategoryRepository implements ICategoryRepository {
     return this.manager.save(category)
   }
 
-  async toDelete (id: number, category: TCategoryRequest): Promise<TCategoryModel> {
+  async toDelete(id: number, category: TCategoryRequest): Promise<TCategoryModel> {
     const dataModel = {
       ...category,
       id: +id

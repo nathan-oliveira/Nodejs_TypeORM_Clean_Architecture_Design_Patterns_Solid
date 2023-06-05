@@ -1,0 +1,5 @@
+export * from './goal-delete-controller'
+export * from './goal-getall-controller'
+export * from './goal-getbyid-controller'
+export * from './goal-post-controller'
+export * from './goal-put-controller'
