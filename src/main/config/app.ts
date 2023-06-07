@@ -14,16 +14,24 @@ class App {
 
   constructor () {
     this.app = express()
-    this.middleware() // eslint-disable-line
+    this.connection() // eslint-disable-line
+    this.middleware()
+    this.errorHandler()
   }
 
-  private async middleware (): Promise<void> {
+  private async connection (): Promise<void> {
     await Connection()
+  }
+
+  private middleware (): void {
     this.app.use(cors())
     this.app.use(express.urlencoded({ extended: true }))
     this.app.use(express.json({ limit: '20mb' }))
-    setupRoutes(this.app)
     this.app.use(helmet())
+    setupRoutes(this.app)
+  }
+
+  private errorHandler (): void {
     this.app.use(errorHandler.handler)
     this.app.use(function (req, res, next) {
       res.status(404).json(createObjectCustomError('url', 'URL não encontrada!'))

@@ -3,7 +3,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToMany,
+  ManyToOne,
   JoinColumn,
   CreateDateColumn,
   UpdateDateColumn
@@ -39,7 +39,7 @@ export class GoalDAO extends BaseEntity {
   @UpdateDateColumn()
   updated_at: Date
 
-  @ManyToMany((type: any) => UserDAO, (user: any) => user.id)
+  @ManyToOne((type: any) => UserDAO, (user: any) => user.id)
   @JoinColumn({ name: 'userId' })
   userId: number // UserDAO
 }
