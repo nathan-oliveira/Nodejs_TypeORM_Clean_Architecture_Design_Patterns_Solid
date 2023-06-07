@@ -3,7 +3,7 @@
 ## Comandos TypeORM
 
 ```
-npm run typeorm -- migration:create -n create-goals
+npm run typeorm -- migration:create -n create-business
 npm run typeorm -- migration:run
 ```
 

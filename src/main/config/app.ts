@@ -5,7 +5,7 @@ import helmet from 'helmet'
 import cors from 'cors'
 
 import errorHandler from '@/main/config/errors/handler'
-import { Conn as Connection } from '@/main/config/conn'
+import { Conn as ConnectionTypeORMFromDataBase } from '@/main/config/conn'
 import { setupRoutes } from '@/main/config/routes'
 import { createObjectCustomError } from '@/presentation/helpers'
 
@@ -14,13 +14,13 @@ class App {
 
   constructor () {
     this.app = express()
-    this.connection() // eslint-disable-line
+    this.connection()
     this.configApp()
     this.errorHandler()
   }
 
-  private async connection (): Promise<void> {
-    await Connection()
+  private connection (): unknown {
+    return ConnectionTypeORMFromDataBase()
   }
 
   private configApp (): void {
@@ -33,7 +33,7 @@ class App {
 
   private errorHandler (): void {
     this.app.use(errorHandler.handler)
-    this.app.use(function (req, res, next) {
+    this.app.use((req, res, next) => {
       res.status(404).json(createObjectCustomError('url', 'URL não encontrada!'))
     })
   }
