@@ -15,7 +15,7 @@ class App {
   constructor () {
     this.app = express()
     this.connection() // eslint-disable-line
-    this.middleware()
+    this.configApp()
     this.errorHandler()
   }
 
@@ -23,7 +23,7 @@ class App {
     await Connection()
   }
 
-  private middleware (): void {
+  private configApp (): void {
     this.app.use(cors())
     this.app.use(express.urlencoded({ extended: true }))
     this.app.use(express.json({ limit: '20mb' }))
