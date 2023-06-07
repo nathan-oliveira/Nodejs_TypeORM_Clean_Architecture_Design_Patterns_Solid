@@ -12,9 +12,10 @@ import {
 import { IsNotEmpty, IsEnum } from 'class-validator'
 
 import { UserDAO } from './user'
+import { CategoryDAO } from './category'
 
-@Entity('goals')
-export class GoalDAO extends BaseEntity {
+@Entity('business')
+export class BusinessDAO extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number
 
@@ -41,5 +42,9 @@ export class GoalDAO extends BaseEntity {
 
   @ManyToOne((type: any) => UserDAO, (user: any) => user.id)
   @JoinColumn({ name: 'userId' })
-  userId: number // UserDAO
+  userId: number
+
+  @ManyToOne((type: any) => CategoryDAO, (category: any) => category.id)
+  @JoinColumn({ name: 'categoryId' })
+  categoryId: number
 }

@@ -8,19 +8,19 @@ import { validateError } from '@/presentation/helpers'
 import { GoalNotFoundError } from '@/domain/errors'
 
 export class GoalRepository implements IGoalRepository {
-  constructor(
+  constructor (
     private readonly manager: Repository<GoalDAO> = getRepository(GoalDAO)
   ) { }
 
-  async getAll(userId: number): Promise<TGoalModel[]> {
+  async getAll (userId: number): Promise<TGoalModel[]> {
     return this.manager.find({ where: { userId } })
   }
 
-  async getById(userId: number, id: number): Promise<TGoalModel[]> {
+  async getById (userId: number, id: number): Promise<TGoalModel[]> {
     return this.manager.find({ where: { id, userId } })
   }
 
-  async toCreate(userId: number, dataForm: TGoalRequest): Promise<TGoalModel> {
+  async toCreate (userId: number, dataForm: TGoalRequest): Promise<TGoalModel> {
     const data = {
       ...dataForm,
       userId
@@ -33,7 +33,7 @@ export class GoalRepository implements IGoalRepository {
     return this.manager.save(goal)
   }
 
-  async toUpdate(userId: number, id: number, dataForm: TGoalRequest): Promise<TGoalModel> {
+  async toUpdate (userId: number, id: number, dataForm: TGoalRequest): Promise<TGoalModel> {
     const goal = await this.manager.preload({
       ...dataForm,
       userId,
@@ -44,7 +44,7 @@ export class GoalRepository implements IGoalRepository {
     return this.manager.save(goal)
   }
 
-  async toDelete(userId: number, id: number, goal: TGoalRequest): Promise<TGoalModel> {
+  async toDelete (userId: number, id: number, goal: TGoalRequest): Promise<TGoalModel> {
     const dataModel = {
       ...goal,
       userId,

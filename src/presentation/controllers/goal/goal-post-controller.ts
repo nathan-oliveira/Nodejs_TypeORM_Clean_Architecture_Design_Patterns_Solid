@@ -3,9 +3,9 @@ import { IGoalService } from '@/domain/usecases'
 import { GoalPostViewModel } from '@/presentation/view-models'
 
 export class GoalPostController implements Controller {
-  constructor(private readonly goalService: IGoalService) { }
+  constructor (private readonly goalService: IGoalService) { }
 
-  async handle(http: HttpRequest): Promise<HttpResponse<GoalPostViewModel>> {
+  async handle (http: HttpRequest): Promise<HttpResponse<GoalPostViewModel>> {
     const { description, types, money } = http.body
 
     try {

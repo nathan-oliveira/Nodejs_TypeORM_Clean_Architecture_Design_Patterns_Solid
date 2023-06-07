@@ -36,7 +36,7 @@ export const accessControl = async (req: Request, res: Response, next: NextFunct
 const verifyRouteValid = async (level: number, path: string, method: string): Promise<boolean> => {
   const exclusions = {
     client: {
-      routes: ['/profile', '/category', '/goal'], // configurar methods
+      routes: ['/profile', '/category', '/goal', '/business'], // configurar methods
       level: 0
     }
   }

@@ -55,7 +55,8 @@ export class createGoals1666874107757 implements MigrationInterface {
 
   public async down (queryRunner: QueryRunner): Promise<void> {
     const table = await queryRunner.getTable('users')
-    const foreignKey = table!.foreignKeys.find(fk => fk.columnNames.indexOf('userId') !== 1)
+    const foreignKey = table!.foreignKeys.find(fk => fk.columnNames.includes('userId'))
+
     await queryRunner.dropForeignKey('users', foreignKey!)
     await queryRunner.dropColumn('users', 'userId')
     await queryRunner.dropTable('goals')

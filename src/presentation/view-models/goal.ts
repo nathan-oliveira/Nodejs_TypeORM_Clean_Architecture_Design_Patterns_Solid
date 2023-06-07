@@ -7,7 +7,7 @@ export class GoalGetAllViewModel {
   money: number
   userId: number
 
-  static getView(entity: TGoal[]): GoalGetAllViewModel[] {
+  static getView (entity: TGoal[]): GoalGetAllViewModel[] {
     return entity.map((item) => ({
       id: item.id,
       description: item.description,
@@ -25,7 +25,7 @@ export class GoalGetByIdViewModel {
   money: number
   userId: number
 
-  static getView(entity: TGoal): GoalGetByIdViewModel {
+  static getView (entity: TGoal): GoalGetByIdViewModel {
     return {
       id: entity.id,
       description: entity.description,
@@ -42,7 +42,7 @@ export class GoalPostViewModel {
   money: number
   userId: number
 
-  static getView(entity: TGoalCreate): GoalPostViewModel {
+  static getView (entity: TGoalCreate): GoalPostViewModel {
     return {
       description: entity.description,
       types: entity.types,
